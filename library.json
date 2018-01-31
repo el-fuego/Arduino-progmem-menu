@@ -1,0 +1,17 @@
+{
+  "name": "Arduino-progmem-menu",
+  "keywords": "menu, arduino, library, number, field, text, nested, submenu, lcd, joystick, encoder",
+  "description": "Small arduino menu, what used program memory to store data. RAM is used just for behaviour. Understandable source code. Support nested submenus, number and text fields editing. Many input and output devices.",
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/el-fuego/Arduino-progmem-menu.git"
+  },
+  "authors": {
+    "name": "Yuriy Pulyaev",
+    "url": "https://github.com/el-fuego"
+  },
+  "version": "0.1.0",
+  "frameworks": "arduino",
+  "platforms": "*"
+}

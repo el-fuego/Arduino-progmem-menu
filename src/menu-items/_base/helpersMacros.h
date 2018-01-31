@@ -1,0 +1,9 @@
+#ifndef MENU__HELPERS_MACROS_H
+#define MENU__HELPERS_MACROS_H
+
+
+#define CALL_CHILD_MACRO(x) CHILD_MACRO__##x
+#define GET_VAR_NAME_FOR_LIST(x) VAR_NAME_FOR_LIST__##x
+
+
+#endif;

@@ -1,0 +1,63 @@
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+BaseData	KEYWORD1
+MenuData	KEYWORD1
+NumberFieldData	KEYWORD1
+TextFieldData	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+BaseChild	KEYWORD2
+Menu	KEYWORD2
+NumberField	KEYWORD2
+TextField	KEYWORD2
+Action	KEYWORD2
+
+getBaseData	KEYWORD2
+getType	KEYWORD2
+getName	KEYWORD2
+enter	KEYWORD2
+exit	KEYWORD2
+getValue	KEYWORD2
+getValueLength	KEYWORD2
+getTextAfter	KEYWORD2
+getChildCount	KEYWORD2
+getChildAtIndexAsBase	KEYWORD2
+hasStyle	KEYWORD2
+selectChildAtIndex	KEYWORD2
+selectPreviousChild	KEYWORD2
+selectNextChild	KEYWORD2
+enterSelectedChild	KEYWORD2
+decrementValue	KEYWORD2
+incrementValue	KEYWORD2
+selectSymbolAtIndex	KEYWORD2
+selectPreviousSymbolOrExit	KEYWORD2
+selectPreviousSymbol	KEYWORD2
+selectNextSymbol	KEYWORD2
+decrementSymbol	KEYWORD2
+incrementSymbol	KEYWORD2
+renderScreen	KEYWORD2
+renderSelf	KEYWORD2
+
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+TYPE	LITERAL1
+SUBMENU	LITERAL1
+NUMBER_FIELD	LITERAL1
+TEXT_FIELD	LITERAL1
+ACTION	LITERAL1
+SELECTED_LINE_START_SYMBOL	LITERAL1
+UNSELECTED_LINE_START_SYMBOL	LITERAL1
+MENU_NAME_END_SYMBOL	LITERAL1
+OUTPUT_LINES_COUNT	LITERAL1
+MENU_STYLE	LITERAL1
+NAME_HIDDEN_FOR_CHILD_LIST	LITERAL1
+HORIZONTAL_CHILD_LIST	LITERAL1
+INLINE_CHILD_LIST	LITERAL1
