@@ -123,15 +123,18 @@ namespace Menu {
     uint8_t lineIndex = startLineIndex;
     unsigned char linesCount = controller->output->linesCount;
     bool isHorizontalView = hasStyle(MENU_STYLE::HORIZONTAL_CHILD_LIST);
+    bool isInlineView = hasStyle(MENU_STYLE::INLINE_CHILD_LIST);
     uint8_t childrenCount = getChildCount();
-    uint8_t childIndex = _getFirstItemOnPageIndex(lineIndex);
+    uint8_t childIndex = isHorizontalView ? 0 : _getFirstItemOnPageIndex(lineIndex);
 
-    while (lineIndex < linesCount && childIndex < childrenCount) {
-      controller->output->print(
-        childIndex == selectedChildIndex ?
-          SELECTED_LINE_START_SYMBOL :
-          UNSELECTED_LINE_START_SYMBOL
-      );
+    while ((lineIndex < linesCount || isHorizontalView) && childIndex < childrenCount) {
+      if (!isHorizontalView || isInlineView) {
+        controller->output->print(
+          childIndex == selectedChildIndex ?
+            SELECTED_LINE_START_SYMBOL :
+            UNSELECTED_LINE_START_SYMBOL
+        );
+      }
 
       _renderChildAtIndex(childIndex);
 
