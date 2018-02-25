@@ -128,13 +128,14 @@ namespace Menu {
     uint8_t childIndex = isHorizontalView ? 0 : _getFirstItemOnPageIndex(lineIndex);
 
     while ((lineIndex < linesCount || isHorizontalView) && childIndex < childrenCount) {
-      if (!isHorizontalView || isInlineView) {
+//      TODO: decide how to show horizontal view better
+//      if (!isHorizontalView || isInlineView) {
         controller->output->print(
           childIndex == selectedChildIndex ?
             SELECTED_LINE_START_SYMBOL :
             UNSELECTED_LINE_START_SYMBOL
         );
-      }
+//      }
 
       _renderChildAtIndex(childIndex);
 
@@ -163,6 +164,7 @@ namespace Menu {
     }
 
     _renderChildList(lineIndex);
+    controller->output->end();
   };
 
   /**

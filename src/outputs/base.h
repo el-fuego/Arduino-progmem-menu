@@ -10,6 +10,7 @@ namespace Menu {
       virtual void printEditMode(char* str);
       virtual void clear();
       virtual void nextLine();
+      virtual void end();
   };
 };
 

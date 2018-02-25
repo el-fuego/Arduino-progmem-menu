@@ -17,6 +17,7 @@ namespace Menu {
       void printEditMode(char* str);
       void clear();
       void nextLine();
+      inline void end() {};
   };
 };
 
