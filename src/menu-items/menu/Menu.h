@@ -8,16 +8,16 @@
 // TODO: use from current output instead (override ability)
 #ifndef SELECTED_LINE_START_SYMBOL
   #define SELECTED_LINE_START_SYMBOL ">"
-#endif;
+#endif
 #ifndef UNSELECTED_LINE_START_SYMBOL
   #define UNSELECTED_LINE_START_SYMBOL " "
-#endif;
+#endif
 #ifndef MENU_NAME_END_SYMBOL
   #define MENU_NAME_END_SYMBOL ":"
-#endif;
+#endif
 #ifndef OUTPUT_LINES_COUNT
   #define OUTPUT_LINES_COUNT 255
-#endif;
+#endif
 
 
 namespace Menu {
@@ -41,15 +41,15 @@ namespace Menu {
 
   class Menu : public BaseChild {
     private:
-      MenuData *data; // pointer to PROGMEM
+      const MenuData *data; // pointer to PROGMEM
       MenuData* getData();
 
       uint8_t _getFirstItemOnPageIndex(uint8_t startLineIndex = 0);
-      void Menu::_renderChildList(uint8_t startLineIndex = 0);
+      void _renderChildList(uint8_t startLineIndex = 0);
       void _renderChildAtIndex(uint8_t childIndex);
 
     public:
-      Menu(BaseData* _baseData, MenuData* _data) : BaseChild(_baseData), data(_data) {};
+      Menu(const BaseData* _baseData, const MenuData* _data) : BaseChild(_baseData), data(_data) {};
 
       uint8_t selectedChildIndex = 0;
 
@@ -69,4 +69,4 @@ namespace Menu {
   };
 };
 
-#endif;
+#endif

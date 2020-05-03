@@ -4,21 +4,27 @@
 #include <Arduino.h>
 #include "../base.h"
 
+#ifndef USBSerial
+#define SerialType HardwareSerial
+#else
+#define SerialType USBSerial
+#endif
+
 
 namespace Menu {
   class SerialOutput : public Output {
     private:
-      HardwareSerial *serial = &Serial;
+      SerialType *serial = &Serial;
 
     public:
       SerialOutput();
-      SerialOutput(HardwareSerial *serial);
-      void print(char* str);
-      void printEditMode(char* str);
+      SerialOutput(SerialType *serial);
+      void print(const char* str);
+      void printEditMode(const char* str);
       void clear();
       void nextLine();
       inline void end() {};
   };
 };
 
-#endif;
+#endif

@@ -8,26 +8,26 @@ namespace Menu {
   enum TYPE { SUBMENU, NUMBER_FIELD, TEXT_FIELD, ACTION };
 
   struct BaseData {
-    uint8_t type;
-    char* name; // pointer to PROGMEM
+    const uint8_t type;
+    const char* name; // pointer to PROGMEM
   };
 
   class BaseChild {
     private:
-      BaseData *baseData; // pointer to PROGMEM
+      const BaseData* baseData; // pointer to PROGMEM
       BaseData* getBaseData();
 
     public:
-      BaseChild(BaseData* _baseData) : baseData(_baseData) {};
+      BaseChild(const BaseData* _baseData) : baseData(_baseData) {};
 
       bool isActive = false;
 
-      uint8_t getType();
-      char* getName();
+      const uint8_t getType();
+      const char* getName();
 
       void enter();
       void exit();
   };
 };
 
-#endif;
+#endif

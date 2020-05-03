@@ -8,23 +8,23 @@
 namespace Menu {
 
   struct TextFieldData {
-    uint8_t valueLength;
+    const uint8_t valueLength;
     char* value; // pointer to RAM
-    char* textAfter; // pointer to PROGMEM
+    const char* textAfter; // pointer to PROGMEM
   };
 
   class TextField : public BaseChild {
     private:
-      TextFieldData *data; // pointer to PROGMEM
+      const TextFieldData *data; // pointer to PROGMEM
       TextFieldData* getData();
 
     public:
-      TextField(BaseData* _baseData, TextFieldData* _data) : BaseChild(_baseData), data(_data) {};
+      TextField(const BaseData* _baseData, const TextFieldData* _data) : BaseChild(_baseData), data(_data) {};
 
       uint8_t selectedSymbolIndex = 0;
 
-      uint8_t getValueLength();
-      char* getTextAfter();
+      const uint8_t getValueLength();
+      const char* getTextAfter();
       char* getValue();
 
       void selectSymbolAtIndex(uint8_t index);
@@ -39,4 +39,4 @@ namespace Menu {
   };
 };
 
-#endif;
+#endif

@@ -8,13 +8,13 @@ namespace Menu {
     linesCount = 2;
   };
 
-  void LcdI2cTextOutput::print(char* str) {
+  void LcdI2cTextOutput::print(const char* str) {
     driver->print(str);
 
     currentX += strlen(str);
   };
 
-  void LcdI2cTextOutput::printEditMode(char* str) {
+  void LcdI2cTextOutput::printEditMode(const char* str) {
     print(str);
 
     lastEditCharacterPositionX = currentX - 1;

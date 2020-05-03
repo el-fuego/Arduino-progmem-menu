@@ -67,6 +67,6 @@ namespace Menu {
   };
 
 
-  extern const Controller* controller = new Controller();
+  extern Controller* controller = new Controller();
 };
 

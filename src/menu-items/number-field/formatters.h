@@ -1,27 +1,29 @@
 #ifndef MENU__NUMBER_FORMATTERS_H
 #define MENU__NUMBER_FORMATTERS_H
 
+#include <inttypes.h>
+
 
 namespace Menu {
-  char* toFormatted(char* format, int value);
+  char* toFormatted(char* format, unsigned int value);
 
-  char* toNumber(int value);
+  char* toNumber(unsigned int value);
 
-  char* to2Digits(int value);
-  char* to3Digits(int value);
-  char* to4Digits(int value);
-  char* to5Digits(int value);
-  char* to6Digits(int value);
-  char* to7Digits(int value);
-  char* to8Digits(int value);
-  char* to9Digits(int value);
-  char* to10Digits(int value);
+  char* to2Digits(unsigned int value);
+  char* to3Digits(unsigned int value);
+  char* to4Digits(unsigned int value);
+  char* to5Digits(unsigned int value);
+  char* to6Digits(unsigned int value);
+  char* to7Digits(unsigned int value);
+  char* to8Digits(unsigned int value);
+  char* to9Digits(unsigned int value);
+  char* to10Digits(unsigned int value);
 
-  char* toTime(int value);
-  char* toTime24(int value);
+  char* toTime(unsigned int value);
+  char* toTime24(unsigned int value);
 
-  char* toPeriod(int value);
+  char* toPeriod(unsigned int value);
 
 };
 
-#endif;
+#endif

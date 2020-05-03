@@ -1,3 +1,4 @@
+#include <Arduino.h>
 #include <avr/pgmspace.h>
 #include "./Menu.h"
 #include "../action/Action.h"
@@ -7,7 +8,6 @@
 
 
 namespace Menu {
-
   //////////////////////////////////////////
   // DATA GETTERS
 
@@ -15,28 +15,44 @@ namespace Menu {
   * Copy of baseData to memory and return pointer to it
   */
   MenuData* Menu::getData() {
-    MenuData temp;
-    memcpy_P((void*)&temp, data, sizeof(temp));
-    return &temp;
+    void* tempMenuData = malloc(sizeof(MenuData));
+    memcpy_P(tempMenuData, data, sizeof(MenuData));
+    return (MenuData*)tempMenuData;
   };
 
   uint8_t Menu::getChildCount() {
-    return getData()->childCount;
+    MenuData* data = getData();
+    uint8_t childCount = data->childCount;
+
+    free(data);
+    return childCount;
   };
 
   // Child can be one of classes, what are extending BaseChild
   // Real type can be determined, basing on child.getType() return value
   BaseChild* Menu::getChildAtIndexAsBase(uint8_t childIndex) {
-    return pgm_read_word_near(getData()->childList + childIndex);
+    MenuData* data = getData();
+    BaseChild* const* childList = data->childList;
+
+    free(data);
+    return (BaseChild*)pgm_read_word_near(childList + childIndex);
   };
 
   BaseChild* Menu::getSelectedChildAsBase() {
-    return pgm_read_word_near(getData()->childList + selectedChildIndex);
+    MenuData* data = getData();
+    BaseChild* const* childList = data->childList;
+
+    free(data);
+    return (BaseChild*)pgm_read_word_near(childList + selectedChildIndex);
   };
 
   // Is bit flag present?
   bool Menu::hasStyle(MENU_STYLE styleToCheck) {
-    return (getData()->styles & styleToCheck) == styleToCheck;
+    MenuData* data = getData();
+    uint8_t styles = data->styles;
+
+    free(data);
+    return (styles & styleToCheck) == styleToCheck;
   };
 
 
@@ -156,7 +172,9 @@ namespace Menu {
 
     uint8_t lineIndex = 0;
     if (!hasStyle(MENU_STYLE::NAME_HIDDEN_FOR_CHILD_LIST)) {
-      controller->output->print(getName());
+      char* name = getName();
+      controller->output->print(name);
+      free(name);
       controller->output->print(MENU_NAME_END_SYMBOL);
 
       controller->output->nextLine();
@@ -171,7 +189,9 @@ namespace Menu {
   * Render as item for parent child list
   */
   void Menu::renderSelf() {
-    controller->output->print(getName());
+    const char* name = getName();
+    controller->output->print(name);
+    free(name);
 
     if(!hasStyle(MENU_STYLE::INLINE_CHILD_LIST)) {
       return;

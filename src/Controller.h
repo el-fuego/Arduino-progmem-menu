@@ -21,7 +21,7 @@ namespace Menu {
       void update();
   };
 
-  extern const Controller* controller;
+  extern Controller* controller;
 };
 
-#endif;
+#endif

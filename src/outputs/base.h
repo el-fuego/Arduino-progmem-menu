@@ -6,12 +6,12 @@ namespace Menu {
   class Output {
     public:
       unsigned char linesCount = 255;
-      virtual void print(char* str);
-      virtual void printEditMode(char* str);
+      virtual void print(const char* str);
+      virtual void printEditMode(const char* str);
       virtual void clear();
       virtual void nextLine();
       virtual void end();
   };
 };
 
-#endif;
+#endif

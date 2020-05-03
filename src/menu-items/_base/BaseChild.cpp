@@ -1,10 +1,10 @@
+#include <Arduino.h>
 #include <avr/pgmspace.h>
 #include "./BaseChild.h"
 #include "./helpers.h"
 
 
 namespace Menu {
-
   //////////////////////////////////////////
   // DATA GETTERS
 
@@ -12,17 +12,25 @@ namespace Menu {
   * Copy of baseData to memory and return pointer to it
   */
   BaseData* BaseChild::getBaseData() {
-    BaseData temp;
-    memcpy_P((void*)&temp, baseData, sizeof(temp));
-    return &temp;
+    void* tempBaseData = malloc(sizeof(BaseData));
+    memcpy_P(tempBaseData, baseData, sizeof(BaseData));
+    return (BaseData*)tempBaseData;
   };
 
-  uint8_t BaseChild::getType() {
-    return getBaseData()->type;
+  const uint8_t BaseChild::getType() {
+    BaseData* data = getBaseData();
+    const uint8_t type = data->type;
+
+    free(data);
+    return type;
   };
 
-  char* BaseChild::getName() {
-    return readProgmemSrt(getBaseData()->name);
+  const char* BaseChild::getName() {
+    BaseData* data = getBaseData();
+    const char* name = data->name;
+
+    free(data);
+    return readProgmemSrt(name);
   };
 
 

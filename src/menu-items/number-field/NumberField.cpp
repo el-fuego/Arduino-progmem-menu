@@ -1,3 +1,4 @@
+#include <Arduino.h>
 #include <avr/pgmspace.h>
 #include "./NumberField.h"
 #include "../_base/helpers.h"
@@ -5,7 +6,6 @@
 
 
 namespace Menu {
-
   //////////////////////////////////////////
   // DATA GETTERS
 
@@ -13,17 +13,25 @@ namespace Menu {
   * Copy of baseData to memory and return pointer to it
   */
   NumberFieldData* NumberField::getData() {
-    NumberFieldData temp;
-    memcpy_P((void*)&temp, data, sizeof(temp));
-    return &temp;
+    void* tempNumberFieldData = malloc(sizeof(NumberFieldData));
+    memcpy_P(tempNumberFieldData, data, sizeof(NumberFieldData));
+    return (NumberFieldData*)tempNumberFieldData;
   };
 
   char* NumberField::getTextAfter() {
-    return readProgmemSrt(getData()->textAfter);
+    NumberFieldData* data = getData();
+    char* textAfter = readProgmemSrt(data->textAfter);
+
+    free(data);
+    return textAfter;
   };
 
-  int* NumberField::getValue() {
-    return getData()->value;
+  unsigned int* NumberField::getValue() {
+    NumberFieldData* data = getData();
+    unsigned int* value = data->value;
+
+    free(data);
+    return value;
   };
 
 
@@ -31,10 +39,14 @@ namespace Menu {
   // BEHAVIOUR
 
   void NumberField::decrementValue() {
-    int* value = getValue();
-    int minValue = getData()->minValue;
+    NumberFieldData* data = getData();
+    unsigned int* value = data->value;
+    unsigned int minValue = data->minValue;
+    unsigned int valueStep = data->valueStep;
 
-    (*value) -= getData()->valueStep;
+    free(data);
+
+    (*value) = (*value) - valueStep;
 
     if ((*value) < minValue) {
       (*value) = minValue;
@@ -42,10 +54,14 @@ namespace Menu {
   };
 
   void NumberField::incrementValue() {
-    int* value = getValue();
-    int maxValue = getData()->maxValue;
+    NumberFieldData* data = getData();
+    unsigned int* value = data->value;
+    unsigned int maxValue = data->maxValue;
+    unsigned int valueStep = data->valueStep;
 
-    (*value) += getData()->valueStep;
+    free(data);
+
+    (*value) = (*value) + valueStep;
 
     if ((*value) > maxValue) {
       (*value) = maxValue;
@@ -56,21 +72,28 @@ namespace Menu {
   //////////////////////////////////////////
   // RENDER
   // Prepare text to output
-  
+
   /**
   * Render as item for parent child list
   */
   void NumberField::renderSelf() {
+    const char* name = getName();
+    controller->output->print(name);
+    free(name);
 
-    controller->output->print(getName());
+    NumberFieldData* data = getData();
+    char* formattedValue = data->formatValue(*(data->value));
+    free(data);
 
-    char* value = getData()->formatValue(*(getValue()));
     if (isActive) {
-      controller->output->printEditMode(value);
+      controller->output->printEditMode(formattedValue);
     } else {
-      controller->output->print(value);
+      controller->output->print(formattedValue);
     }
+    free(formattedValue);
 
-    controller->output->print(getTextAfter());
+    char* textAfter = getTextAfter();
+    controller->output->print(textAfter);
+    free(textAfter);
   };
 };

@@ -17,12 +17,12 @@ namespace Menu {
 
     public:
       LcdPcd8544Output(PCD8544* _driver);
-      void print(char* str);
-      void printEditMode(char* str);
+      void print(const char* str);
+      void printEditMode(const char* str);
       void clear();
       void nextLine();
       inline void end() {};
   };
 };
 
-#endif;
+#endif

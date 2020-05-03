@@ -7,4 +7,4 @@
 #define CHILD_MACRO__BLANK()
 
 
-#endif;
+#endif

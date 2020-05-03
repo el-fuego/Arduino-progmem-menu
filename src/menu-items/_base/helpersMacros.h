@@ -6,4 +6,4 @@
 #define GET_VAR_NAME_FOR_LIST(x) VAR_NAME_FOR_LIST__##x
 
 
-#endif;
+#endif

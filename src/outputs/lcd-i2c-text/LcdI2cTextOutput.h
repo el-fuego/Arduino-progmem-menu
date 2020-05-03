@@ -22,12 +22,12 @@ namespace Menu {
 
     public:
       LcdI2cTextOutput(LiquidCrystal_I2C* _driver);
-      void print(char* str);
-      void printEditMode(char* str);
+      void print(const char* str);
+      void printEditMode(const char* str);
       void clear();
       void nextLine();
       void end();
   };
 };
 
-#endif;
+#endif

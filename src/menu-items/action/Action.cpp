@@ -17,6 +17,8 @@ namespace Menu {
   // Prepare text to output
 
   void Action::renderSelf() {
-    controller->output->print(getName());
+    const char* name = getName();
+    controller->output->print(name);
+    free(name);
   };
 };

@@ -9,24 +9,24 @@
 namespace Menu {
 
   struct NumberFieldData {
-    int* value; // pointer to RAM
-    char* (*formatValue)(int* value); // pointer to RAM
-    char* textAfter; // pointer to PROGMEM
-    int minValue;
-    int maxValue;
-    int valueStep;
+    unsigned int* value; // pointer to RAM
+    char* (*formatValue)(unsigned int value); // pointer to RAM
+    const char* textAfter; // pointer to PROGMEM
+    const unsigned int minValue;
+    const unsigned int maxValue;
+    const unsigned int valueStep;
   };
 
   class NumberField : public BaseChild {
     private:
-      NumberFieldData* data; // pointer to PROGMEM
+      const NumberFieldData* data; // pointer to PROGMEM
       NumberFieldData* getData();
 
     public:
-      NumberField(BaseData* _baseData, NumberFieldData* _data) : BaseChild(_baseData), data(_data) {};
+      NumberField(const BaseData* _baseData, const NumberFieldData* _data) : BaseChild(_baseData), data(_data) {};
 
       char* getTextAfter();
-      int* getValue();
+      unsigned int* getValue();
 
       void decrementValue();
       void incrementValue();
@@ -35,4 +35,4 @@ namespace Menu {
   };
 };
 
-#endif;
+#endif

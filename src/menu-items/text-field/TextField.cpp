@@ -1,3 +1,4 @@
+#include <Arduino.h>
 #include <avr/pgmspace.h>
 #include "./TextField.h"
 #include "../_base/helpers.h"
@@ -7,7 +8,6 @@
 
 
 namespace Menu {
-
   //////////////////////////////////////////
   // DATA GETTERS
 
@@ -15,21 +15,33 @@ namespace Menu {
   * Copy of baseData to memory and return pointer to it
   */
   TextFieldData* TextField::getData() {
-    TextFieldData temp;
-    memcpy_P((void*)&temp, data, sizeof(temp));
-    return &temp;
+    void* tempTextFieldData = malloc(sizeof(TextFieldData));
+    memcpy_P(tempTextFieldData, data, sizeof(TextFieldData));
+    return (TextFieldData*)tempTextFieldData;
   };
 
-  uint8_t TextField::getValueLength() {
-    return getData()->valueLength;
+  const uint8_t TextField::getValueLength() {
+    TextFieldData* data = getData();
+    uint8_t valueLength = data->valueLength;
+
+    free(data);
+    return valueLength;
   };
 
-  char* TextField::getTextAfter() {
-    return readProgmemSrt(getData()->textAfter);
+  const char* TextField::getTextAfter() {
+    TextFieldData* data = getData();
+    char* textAfter = data->textAfter;
+
+    free(data);
+    return readProgmemSrt(textAfter);
   };
 
   char* TextField::getValue() {
-    return getData()->value;
+    TextFieldData* data = getData();
+    char* value = data->value;
+
+    free(data);
+    return value;
   };
 
 
@@ -86,11 +98,12 @@ namespace Menu {
   * Render as item for parent child list
   */
   void TextField::renderSelf() {
-
-    controller->output->print(getName());
+    const char* name = getName();
+    controller->output->print(name);
+    free(name);
 
     uint8_t symbolIndex;
-    uint8_t symbolsCount = getValueLength();
+    const uint8_t symbolsCount = getValueLength();
     char* value = getValue();
     char symbol[] = " ";
 
@@ -102,7 +115,10 @@ namespace Menu {
         controller->output->print(symbol);
       }
     }
+    free(value);
 
-    controller->output->print(getTextAfter());
+    char* textAfter = getTextAfter();
+    controller->output->print(textAfter);
+    free(textAfter);
   };
 };

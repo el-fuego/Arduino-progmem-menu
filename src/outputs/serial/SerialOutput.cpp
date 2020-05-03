@@ -3,13 +3,13 @@
 
 namespace Menu {
   SerialOutput::SerialOutput() {};
-  SerialOutput::SerialOutput(HardwareSerial *_serial) : serial(_serial) {};
+  SerialOutput::SerialOutput(SerialType *_serial) : serial(_serial) {};
 
-  void SerialOutput::print(char* str) {
+  void SerialOutput::print(const char* str) {
     serial->print(str);
   };
 
-  void SerialOutput::printEditMode(char* str) {
+  void SerialOutput::printEditMode(const char* str) {
     serial->print("*");
     serial->print(str);
     serial->print("*");

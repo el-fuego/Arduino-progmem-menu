@@ -8,11 +8,11 @@ namespace Menu {
     linesCount = 6;
   };
 
-  void LcdPcd8544Output::print(char* str) {
+  void LcdPcd8544Output::print(const char* str) {
     driver->print(str);
   };
 
-  void LcdPcd8544Output::printEditMode(char* str) {
+  void LcdPcd8544Output::printEditMode(const char* str) {
     driver->setInverseOutput(true);
     print(str);
     driver->setInverseOutput(false);
