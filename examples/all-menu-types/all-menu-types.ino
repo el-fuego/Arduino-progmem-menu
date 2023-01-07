@@ -3,7 +3,7 @@
 #include "inputs/analog-joystick/AnalogJoystick.h"
 
 
-Menu::AnalogJoystickInput menuInput(A6, A7);
+Menu::AnalogJoystickInput menuInput(A6, A7 /*, false, false */);
 Menu::SerialOutput menuOutput;
 
 int lighteningFrom = 124;

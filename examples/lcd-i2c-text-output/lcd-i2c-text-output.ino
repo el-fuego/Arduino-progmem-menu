@@ -5,9 +5,15 @@
 // https://github.com/marcoschwartz/LiquidCrystal_I2C
 #include <LiquidCrystal_I2C.h>
 
+//////////////////////////////////////////////
+//             !DEPRECATED!
+//   Latest library version need to be
+// installed manually, not through the IDE
+//          Use hd44780 instead
+//////////////////////////////////////////////
 
-LiquidCrystal_I2C lcd(0x27, 16, 2);
-Menu::AnalogJoystickInput menuInput(A6, A7);
+LiquidCrystal_I2C lcd(0x3F, 16, 2); // or lcd(0x27, 16, 2);
+Menu::AnalogJoystickInput menuInput(A6, A7 /*, false, false */);
 Menu::LcdI2cTextOutput menuOutput(&lcd);
 
 #define MAX_TIME_VALUE 24*60 - 1 // 11:59 PM

@@ -9,6 +9,8 @@ namespace Menu {
 
 
   AnalogJoystickInput::AnalogJoystickInput(uint8_t _pinX, uint8_t _pinY) : pinX(_pinX), pinY(_pinY) {};
+  AnalogJoystickInput::AnalogJoystickInput(uint8_t _pinX, uint8_t _pinY, boolean _isXInverted) : pinX(_pinX), pinY(_pinY), isXInverted(_isXInverted){};
+  AnalogJoystickInput::AnalogJoystickInput(uint8_t _pinX, uint8_t _pinY, boolean _isXInverted, boolean _isYInverted) : pinX(_pinX), pinY(_pinY), isXInverted(_isXInverted), isYInverted(_isYInverted){};
 
   void AnalogJoystickInput::init() {
     pinMode(pinX, INPUT);
@@ -49,20 +51,20 @@ namespace Menu {
   INPUT_ACTION AnalogJoystickInput::readRawAction() {
     int valueX = analogRead(pinX);
     if (valueX > JOYSTICK_PIN_HIGH_VALUE) {
-      return INPUT_ACTION::RIGHT;
+      return isXInverted ? INPUT_ACTION::LEFT : INPUT_ACTION::RIGHT;
     }
 
     if (valueX < JOYSTICK_PIN_LOW_VALUE) {
-      return INPUT_ACTION::LEFT;
+      return isXInverted ? INPUT_ACTION::RIGHT : INPUT_ACTION::LEFT;
     }
 
     int valueY = analogRead(pinY);
     if (valueY > JOYSTICK_PIN_HIGH_VALUE) {
-      return INPUT_ACTION::DOWN;
+      return isYInverted ? INPUT_ACTION::UP : INPUT_ACTION::DOWN;
     }
 
     if (valueY < JOYSTICK_PIN_LOW_VALUE) {
-      return INPUT_ACTION::UP;
+      return isYInverted ? INPUT_ACTION::DOWN : INPUT_ACTION::UP;
     }
 
     return INPUT_ACTION::NONE;
