@@ -2,24 +2,19 @@
 #define MENU__LCD_I2C_TEXT_OUTPUT_H
 
 #include <Wire.h>
-#include <LiquidCrystal_I2C.h>
+#include <hd44780.h>
+#include <hd44780ioClass/hd44780_I2Cexp.h>
 #include "../base.h"
 
-//////////////////////////////////////////////
-//             !DEPRECATED!
-//   Latest library version need to be
-// installed manually, not through the IDE
-//          Use hd44780 instead
-//////////////////////////////////////////////
 
 //////////////////////////////////////////////////////
 // MENU output for 16x2, 20x4 text screens
-// Depends on https://github.com/marcoschwartz/LiquidCrystal_I2C
+// Depends on https://github.com/duinoWitchery/hd44780
 //////////////////////////////////////////////////////
 namespace Menu {
-  class LcdI2cTextOutput : public Output {
+  class LcdHd44780Output : public Output {
     private:
-      LiquidCrystal_I2C* driver;
+      hd44780_I2Cexp* driver;
       bool isEditing = false;
       unsigned char currentX = 0;
       unsigned char currentY = 0;
@@ -27,7 +22,7 @@ namespace Menu {
       unsigned char lastEditCharacterPositionY = 0;
 
     public:
-      LcdI2cTextOutput(LiquidCrystal_I2C* _driver);
+      LcdHd44780Output(hd44780_I2Cexp* _driver);
       void print(const char* str);
       void printEditMode(const char* str);
       void clear();

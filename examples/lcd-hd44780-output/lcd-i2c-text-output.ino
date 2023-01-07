@@ -1,12 +1,15 @@
+#include <Wire.h>
 #include <Arduino-progmem-menu.h>
-#include "outputs/lcd-pcd8544/LcdPcd8544Output.h"
+#include "outputs/lcd-hd44780/LcdHd44780Output.h"
 #include "inputs/analog-joystick/AnalogJoystick.h"
-#include <PCD8544.h>
 
+// https://github.com/duinoWitchery/hd44780
+#include <hd44780.h>
+#include <hd44780ioClass/hd44780_I2Cexp.h>
 
-PCD8544 lcd(6, 5, 4, 2, 3);
-Menu::AnalogJoystickInput menuInput(A6, A7);
-Menu::LcdPcd8544Output menuOutput(&lcd);
+hd44780_I2Cexp lcd lcd(0x3F); // or lcd(0x27);
+Menu::AnalogJoystickInput menuInput(A6, A7 /*, false, false */);
+Menu::LcdHd44780Output menuOutput(&lcd);
 
 #define MAX_TIME_VALUE 24*60 - 1 // 11:59 PM
 int lighteningFrom = 05*60 + 30; // 5:30 AM
@@ -27,8 +30,8 @@ MENU(test, "Settings", 0
 
 
 void setup() {
-  lcd.begin(84, 48);
-  lcd.setContrast(63); // 127 max
+  lcd.init();
+  lcd.backlight();
 
   Menu::controller->init(&testMenu, &menuInput, &menuOutput);
 }
