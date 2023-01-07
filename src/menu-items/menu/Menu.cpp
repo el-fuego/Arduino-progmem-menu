@@ -146,11 +146,29 @@ namespace Menu {
     while ((lineIndex < linesCount || isHorizontalView) && childIndex < childrenCount) {
 //      TODO: decide how to show horizontal view better
 //      if (!isHorizontalView || isInlineView) {
+
+      BaseChild* child = getSelectedChildAsBase();
+      if (child->getType() == TYPE::SUBMENU) {
         controller->output->print(
           childIndex == selectedChildIndex ?
             SELECTED_LINE_START_SYMBOL :
             UNSELECTED_LINE_START_SYMBOL
         );
+      } else if(child->isActive) {
+        controller->output->print(
+          childIndex == selectedChildIndex ?
+            ACTIVE_VALUE_START_SYMBOL :
+            UNACTIVE_VALUE_START_SYMBOL
+        );
+      } else {
+       controller->output->print(
+         childIndex == selectedChildIndex ?
+           SELECTED_VALUE_START_SYMBOL :
+           UNSELECTED_VALUE_START_SYMBOL
+        );
+      }
+
+
 //      }
 
       _renderChildAtIndex(childIndex);
