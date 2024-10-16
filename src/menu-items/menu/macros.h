@@ -14,7 +14,7 @@
 // For singe child, pass BLANK() as second macros
 /////////////////////////////////////////////////////////////////////////////////////////////////
 // Usage example:
-//   MENU(myMenu, "Cool name", Menu::MENU_STYLE::NAME_HIDDEN_FOR_CHILD_LIST | Menu::MENU_STYLE::HORIZONTAL_CHILD_LIST, NUMBER_FIELD(...), SUBMENU(...))
+//   MENU(myMenu, "Cool Menu Name", Menu::MENU_STYLE::NAME_HIDDEN_FOR_CHILD_LIST | Menu::MENU_STYLE::HORIZONTAL_CHILD_LIST, NUMBER_FIELD(...), SUBMENU(...))
 //   ... - omited for example args for other macros (see specific macros for details)
 //   see all Menu::MENU_STYLE at Menu.h
 // Will define at PROGMEM:

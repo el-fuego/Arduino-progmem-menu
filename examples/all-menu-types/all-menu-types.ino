@@ -19,7 +19,7 @@ MENU(lightening, "Lightening sett.", (Menu::MENU_STYLE::NAME_HIDDEN_FOR_CHILD_LI
   ,NUMBER_FIELD(lighteningToMenu, "to ", lighteningTo, Menu::to3Digits, " m^2", 0, 1000, 1)
 );
 
-MENU(test, "Test Settings", (0 | Menu::MENU_STYLE::NAME_HIDDEN_FOR_CHILD_LIST)
+MENU(main, "Settings", (0 | Menu::MENU_STYLE::NAME_HIDDEN_FOR_CHILD_LIST)
   ,SUBMENU(lightening)
   ,TEXT_FIELD(testField, "Text Field '", text, "'")
   ,ACTION(turnLedOn, "Turn LED ON", turnLedOn)
@@ -31,7 +31,7 @@ void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
 
   Serial.println("Use joystick to open and navigate menu");
-  Menu::controller->init(&testMenu, &menuInput, &menuOutput);
+  Menu::controller->init(&mainMenu, &menuInput, &menuOutput);
 }
 
 void loop() {

@@ -5,7 +5,7 @@
 
 
 namespace Menu {
-  char* toFormatted(char* format, unsigned int value);
+  char* toFormatted(char* sprintfFormat, unsigned int value);
 
   char* toNumber(unsigned int value);
 
@@ -23,7 +23,6 @@ namespace Menu {
   char* toTime24(unsigned int value);
 
   char* toPeriod(unsigned int value);
-
 };
 
 #endif

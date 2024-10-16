@@ -5,9 +5,9 @@
 
 // TODO: add float support
 namespace Menu {
-  char* toFormatted(char* format, unsigned int value) {
+  char* toFormatted(char* sprintfFormat, unsigned int value) {
     char* charBuffer = malloc(CHAR_BUFFER_LENGTH);
-    sprintf(charBuffer, format, value);
+    sprintf(charBuffer, sprintfFormat, value);
     return charBuffer;
   };
 
@@ -51,10 +51,10 @@ namespace Menu {
     return toFormatted("%010d", value);
   };
 
-  char* toTime(unsigned int value) {
-    unsigned char hours24 = value / 60;
+  char* toTime(unsigned int totalMinutesValue) {
+    unsigned char hours24 = totalMinutesValue / 60;
     unsigned char hours = hours24 % 12;
-    unsigned char minutes = value % 60;
+    unsigned char minutes = totalMinutesValue % 60;
     bool isAm = hours24 < 12;
 
     if (hours == 0) {
@@ -66,20 +66,20 @@ namespace Menu {
     return charBuffer;
   };
 
-  char* toTime24(unsigned int value) {
-    unsigned char hours = value / 60;
-    unsigned char minutes = value % 60;
+  char* toTime24(unsigned int totalMinutesValue) {
+    unsigned char hours = totalMinutesValue / 60;
+    unsigned char minutes = totalMinutesValue % 60;
 
     char* charBuffer = malloc(CHAR_BUFFER_LENGTH);
     sprintf(charBuffer, "%02d:%02d", hours, minutes);
     return charBuffer;
   };
 
-  char* toPeriod(unsigned int value) {
-    if (value < 60) {
-      return toFormatted("%02dm", value);
+  char* toPeriod(unsigned int totalMinutesValue) {
+    if (totalMinutesValue < 60) {
+      return toFormatted("%02dm", totalMinutesValue);
     }
-    return toFormatted("%02dh", value / 60);
+    return toFormatted("%02dh", totalMinutesValue / 60);
   };
 
 };

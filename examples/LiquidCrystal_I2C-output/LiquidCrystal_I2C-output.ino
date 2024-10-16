@@ -27,7 +27,7 @@ MENU(lightening, "Lightening", 0
   ,NUMBER_FIELD(lighteningToMenu, "to ", lighteningTo, Menu::toTime, "", 0, MAX_TIME_VALUE, 10)
 );
 
-MENU(test, "Settings", 0
+MENU(main, "Settings", 0
   ,SUBMENU(lightening)
   ,TEXT_FIELD(testField, "Mess '", text, "'")
   ,BLANK()
@@ -38,7 +38,7 @@ void setup() {
   lcd.init();
   lcd.backlight();
 
-  Menu::controller->init(&testMenu, &menuInput, &menuOutput);
+  Menu::controller->init(&mainMenu, &menuInput, &menuOutput);
 }
 
 void loop() {
