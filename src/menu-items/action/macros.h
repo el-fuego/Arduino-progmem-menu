@@ -13,7 +13,7 @@
 // Use as nested function at MENU macros
 /////////////////////////////////////////////////////////////////////////////////////////////////
 // Usage example:
-//   MENU(..., ACTION(save, "Save", doSave))
+//   MENU(..., ACTION(save, "Save", callback))
 //   ... - omited for example args for MENU macros (see MENU macros for details)
 // Will define at PROGMEM:
 //   char saveName[] = "Save";
